@@ -1,0 +1,42 @@
+{
+  "appTitle": "Webex Contact Center with Video",
+  "logo": " vip assist logo ?",
+  "area": {
+    "agent": {
+      "header": {
+        "widgets": []
+      },
+      "navigation": {
+        "isCollapsible": true,
+        "items": [
+          {
+            "icon": "video",
+            "label": "Video",
+            "id": "video-widget-nav",
+            "page": {
+              "widgets": {
+                "comp1": {
+                  "layout": {
+                    "x": 0,
+                    "y": 0,
+                    "w": 12,
+                    "h": 12
+                  },
+                  "comp": "webex-video-widget-wrapper"
+                }
+              },
+              "layout": "grid"
+            }
+          }
+        ]
+      },
+      "customPages": []
+    }
+  },
+  "customComponents": {
+    "webex-video-widget-wrapper": {
+      "src": "fill this in with my .js url",
+      "type": "module"
+    }
+  }
+}
