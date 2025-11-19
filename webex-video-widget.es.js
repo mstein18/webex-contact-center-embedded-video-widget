@@ -652,7 +652,6 @@ let u = class extends S {
       console.error("Error initializing Webex:", o);
     }
   }
-  // Handle contact center events
   async handleContactEvent(o) {
     switch (console.log("Contact Event Type:", o.type), o.type) {
       case "OFFERED":
@@ -666,7 +665,6 @@ let u = class extends S {
         break;
     }
   }
-  // Join a video meeting
   async joinVideoMeeting(o) {
     try {
       this.webex || await this.initializeWebex();

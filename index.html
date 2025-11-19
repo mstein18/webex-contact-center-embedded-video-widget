@@ -23,6 +23,9 @@
     h1 {
       color: #333;
       margin-top: 0;
+      display: flex;
+      align-items: center;
+      gap: 10px;
     }
     .info {
       background: #f0f7ff;
@@ -30,6 +33,7 @@
       border-left: 4px solid #007aa3;
       margin: 20px 0;
       border-radius: 4px;
+      line-height: 1.6;
     }
     webex-video-widget {
       display: block;
@@ -38,45 +42,100 @@
       border: 2px solid #e0e0e0;
       border-radius: 8px;
       margin-top: 20px;
+      box-shadow: 0 4px 6px rgba(0,0,0,0.1);
     }
     .status {
       margin-top: 15px;
-      padding: 10px;
+      padding: 12px;
       background: #e8f5e9;
       border-radius: 4px;
       color: #2e7d32;
+      font-weight: 500;
+    }
+    .status.loading {
+      background: #fff3e0;
+      color: #e65100;
+    }
+    .footer {
+      margin-top: 30px;
+      padding-top: 20px;
+      border-top: 1px solid #e0e0e0;
+      color: #666;
+      font-size: 14px;
+    }
+    .footer a {
+      color: #007aa3;
+      text-decoration: none;
+    }
+    .footer a:hover {
+      text-decoration: underline;
     }
   </style>
 </head>
 <body>
   <div class="container">
-    <h1>Webex Video Widget - Test Page</h1>
+    <h1>
+      🎥 Webex Video Widget - Test Page
+    </h1>
     
     <div class="info">
-      <strong>Note:</strong> This is a standalone test page. The widget is designed to work within 
-      Webex Contact Center Agent Desktop. Some features (like Desktop SDK integration) won't work here.
+      <strong>⚠️ Note:</strong> This is a standalone test page for development purposes. 
+      The widget is designed to work within the <strong>Webex Contact Center Agent Desktop</strong> environment. 
+      Some features (like Desktop SDK integration and call routing) will not function outside of that context.
     </div>
 
-    <div class="status">
-      Widget loaded successfully! Check below to see it render.
+    <div class="status loading" id="status">
+      ⏳ Loading widget...
     </div>
 
     <!-- Your widget will render here -->
     <webex-video-widget></webex-video-widget>
+
+    <div class="footer">
+      <p>
+        <strong>Widget URL:</strong> 
+        <a href="https://mstein18.github.io/webex-contact-center-embedded-video-widget/webex-video-widget.es.js" target="_blank">
+          webex-video-widget.es.js
+        </a>
+      </p>
+      <p>
+        <strong>GitHub Repository:</strong> 
+        <a href="https://github.com/mstein18/webex-contact-center-embedded-video-widget" target="_blank">
+          mstein18/webex-contact-center-embedded-video-widget
+        </a>
+      </p>
+    </div>
   </div>
 
   <!-- Load your widget module -->
   <script type="module" src="./webex-video-widget.es.js"></script>
   
   <script>
-    // Check if widget loaded
+    // Update status when widget loads
+    const statusDiv = document.getElementById('status');
+    
+    // Check if widget element exists after page load
     window.addEventListener('load', () => {
-      const widget = document.querySelector('webex-video-widget');
-      if (widget) {
-        console.log('Widget element found in DOM');
-      } else {
-        console.error('Widget element not found');
-      }
+      setTimeout(() => {
+        const widget = document.querySelector('webex-video-widget');
+        
+        if (widget) {
+          console.log('✅ Widget element found in DOM');
+          statusDiv.className = 'status';
+          statusDiv.innerHTML = '✅ Widget loaded successfully! The widget is now rendered below.';
+        } else {
+          console.error('❌ Widget element not found');
+          statusDiv.className = 'status';
+          statusDiv.style.background = '#ffebee';
+          statusDiv.style.color = '#c62828';
+          statusDiv.innerHTML = '❌ Widget failed to load. Check browser console for errors.';
+        }
+      }, 1000);
+    });
+
+    // Log any errors
+    window.addEventListener('error', (e) => {
+      console.error('Page error:', e);
     });
   </script>
 </body>
